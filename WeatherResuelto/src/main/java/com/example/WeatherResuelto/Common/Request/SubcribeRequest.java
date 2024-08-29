@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class BasicLogin {
+public class SubcribeRequest {
     private String Email;
-    private String Password;
+    private String Secret;
 }

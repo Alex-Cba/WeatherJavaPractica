@@ -1,9 +1,7 @@
 package com.example.WeatherResuelto.Controller;
 
-import com.example.WeatherResuelto.Common.Request.BasicLogin;
 import com.example.WeatherResuelto.Common.Request.UserRegister;
 import com.example.WeatherResuelto.Service.IUserService;
-import com.example.WeatherResuelto.Service.IWeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,12 +18,6 @@ public class UserController {
     @Autowired
     public UserController(IUserService userService){
         this._userService = userService;
-    }
-
-    @PostMapping("/login/basicLogin")
-    public ResponseEntity<String> BasicLogin(@RequestBody BasicLogin login) {
-        String response = _userService.BasicLogin(login);
-        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/register")

@@ -1,13 +1,17 @@
 package com.example.WeatherResuelto.RestClient;
 
-import com.example.WeatherResuelto.Common.Record.LocationRecord;
+import com.example.WeatherResuelto.Common.Record.*;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
 
 @Data
 @Service
@@ -18,9 +22,13 @@ public class WeatherRestClient {
     @Value("${URL_REST_TEMPLATE}")
     private String url;
 
-    public ResponseEntity<LocationRecord> getLocation() {
+    public ResponseEntity<List<LocationRecord>> getLocations() {
         try {
-            var response = restTemplate.getForEntity(url + "/location", LocationRecord.class);
+            var response = restTemplate.exchange(url + "/location",
+                    HttpMethod.GET,
+                    null,
+                    new ParameterizedTypeReference<List<LocationRecord>>() {
+                    });
             return response;
         } catch (HttpClientErrorException e) {
             return ResponseEntity.status(e.getStatusCode()).body(null);
@@ -29,9 +37,13 @@ public class WeatherRestClient {
         }
     }
 
-    public ResponseEntity<LocationRecord> getTemperature() {
+    public ResponseEntity<List<TemperatureRecord>> getTemperatures() {
         try {
-            var response = restTemplate.getForEntity(url + "/temperature", LocationRecord.class);
+            var response = restTemplate.exchange(url + "/temperature",
+                    HttpMethod.GET,
+                    null,
+                    new ParameterizedTypeReference<List<TemperatureRecord>>() {
+                    });
             return response;
         } catch (HttpClientErrorException e) {
             return ResponseEntity.status(e.getStatusCode()).body(null);
@@ -40,9 +52,13 @@ public class WeatherRestClient {
         }
     }
 
-    public ResponseEntity<LocationRecord> getWind() {
+    public ResponseEntity<List<WindRecord>> getWinds() {
         try {
-            var response = restTemplate.getForEntity(url + "/wind", LocationRecord.class);
+            var response = restTemplate.exchange(url + "/wind",
+                    HttpMethod.GET,
+                    null,
+                    new ParameterizedTypeReference<List<WindRecord>>() {
+                    });
             return response;
         } catch (HttpClientErrorException e) {
             return ResponseEntity.status(e.getStatusCode()).body(null);
@@ -51,9 +67,13 @@ public class WeatherRestClient {
         }
     }
 
-    public ResponseEntity<LocationRecord> getCloudiness() {
+    public ResponseEntity<List<CloudinessRecord>> getCloudinesses() {
         try {
-            var response = restTemplate.getForEntity(url + "/cloudiness", LocationRecord.class);
+            var response = restTemplate.exchange(url + "/cloudiness",
+                    HttpMethod.GET,
+                    null,
+                    new ParameterizedTypeReference<List<CloudinessRecord>>() {
+                    });
             return response;
         } catch (HttpClientErrorException e) {
             return ResponseEntity.status(e.getStatusCode()).body(null);
@@ -62,9 +82,13 @@ public class WeatherRestClient {
         }
     }
 
-    public ResponseEntity<LocationRecord> getAirQuality() {
+    public ResponseEntity<List<AirQualityRecord>> getAirQuality() {
         try {
-            var response = restTemplate.getForEntity(url + "/air_quality", LocationRecord.class);
+            var response = restTemplate.exchange(url + "/air_quality",
+                    HttpMethod.GET,
+                    null,
+                    new ParameterizedTypeReference<List<AirQualityRecord>>() {
+                    });
             return response;
         } catch (HttpClientErrorException e) {
             return ResponseEntity.status(e.getStatusCode()).body(null);

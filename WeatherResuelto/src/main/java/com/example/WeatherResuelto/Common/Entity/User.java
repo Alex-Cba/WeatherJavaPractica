@@ -15,19 +15,18 @@ import java.util.UUID;
 public class User {
 
     @Id
-    @Column(columnDefinition = "VARCHAR(36)")
-    private String Id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long Id;
 
+    @Column
+    private String Secret;
+
+    @Column
     private String Email;
 
+    @Column
     private String Password;
 
+    @Column
     private char FavTemperature;
-
-    @PrePersist
-    public void prePersist() {
-        if (this.Id == null) {
-            this.Id = UUID.randomUUID().toString();
-        }
-    }
 }
