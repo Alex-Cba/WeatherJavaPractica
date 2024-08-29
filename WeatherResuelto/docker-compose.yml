@@ -1,0 +1,32 @@
+version: '1'
+
+services:
+  javaprac:
+    container_name: javaprac
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8080"
+    depends_on:
+      - dbjavaprac
+  dbjavaprac:
+    container_name: dbjavaprac
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: javapractica
+    ports:
+      - "5441:5432"
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: alex@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: postgres
+    ports:
+      - "4095:80"
+    depends_on:
+      - dbjavaprac
